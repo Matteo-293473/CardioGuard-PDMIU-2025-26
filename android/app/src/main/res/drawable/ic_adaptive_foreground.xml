@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Usiamo un padding generoso (32dp) per forzare l'icona al centro e rimpicciolirla -->
+    <item 
+        android:left="32dp"
+        android:right="32dp"
+        android:top="32dp"
+        android:bottom="32dp">
+        <bitmap
+            android:src="@mipmap/launcher_foreground"
+            android:gravity="fill"/>
+    </item>
+</layer-list>

@@ -9,20 +9,34 @@ class PreferencesRepository {
 
   static const _themeKey = 'theme_mode';
   static const _userKey = 'user_profile';
+  static const _notificationsKey = 'notifications_enabled';
 
-  // Gestione Tema
+  // notifiche on/off
+  Future<void> saveNotificationEnabled(bool enabled) async {
+    await _prefs.setBool(_notificationsKey, enabled);
+  }
+
+  bool getNotificationEnabled() {
+    final value = _prefs.get(_notificationsKey);
+    if (value is bool) return value;
+    return false;
+  }
+
+  // tema
   Future<void> saveThemeMode(ThemeMode mode) async {
     // Salviamo come stringa o int
     await _prefs.setInt(_themeKey, mode.index);
   }
 
   ThemeMode getThemeMode() {
-    final index = _prefs.getInt(_themeKey);
-    if (index == null) return ThemeMode.light; // Default
-    return ThemeMode.values[index];
+    final value = _prefs.get(_themeKey);
+    if (value is int && value >= 0 && value < ThemeMode.values.length) {
+      return ThemeMode.values[value];
+    }
+    return ThemeMode.light; // Default
   }
 
-  // Gestione Utente
+  // utente
   Future<void> saveUser(User user) async {
     await _prefs.setString(_userKey, user.toJson());
   }
@@ -32,7 +46,7 @@ class PreferencesRepository {
     if (jsonStr == null) return null;
     try {
       return User.fromJson(jsonStr);
-    } catch (e) {
+    } catch (_) {
       return null;
     }
   }

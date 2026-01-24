@@ -16,14 +16,28 @@ class AirQuality {
   factory AirQuality.fromJson(Map<String, dynamic> json, [double? lat, double? lon, String? city]) {
     final rawAqi = json['current']['us_aqi'] as int;
     
-    final (desc, category) = switch (rawAqi) {
-      <= 50 => ('Ottima', 1),
-      <= 100 => ('Buona', 2),
-      <= 150 => ('Moderata', 3),
-      <= 200 => ('Scarsa', 4),
-      <= 300 => ('Molto Scarsa', 5),
-      _ => ('Pessima', 6),
-    };
+    String desc;
+    int category;
+
+    if (rawAqi <= 50) {
+      desc = 'Ottima';
+      category = 1;
+    } else if (rawAqi <= 100) {
+      desc = 'Buona';
+      category = 2;
+    } else if (rawAqi <= 150) {
+      desc = 'Moderata';
+      category = 3;
+    } else if (rawAqi <= 200) {
+      desc = 'Scarsa';
+      category = 4;
+    } else if (rawAqi <= 300) {
+      desc = 'Molto Scarsa';
+      category = 5;
+    } else {
+      desc = 'Pessima';
+      category = 6;
+    }
     
     return AirQuality(
       aqi: category,

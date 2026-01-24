@@ -3,10 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../data/models/diagnosis_result.dart';
 
+import '../app_constants.dart';
+
 class AIService {
   
-  // Indirizzo in produzione a cui faremo le nostre richieste (render)
-  final String _baseUrl = 'https://cardioguard-backend-v1.onrender.com';
+  // Indirizzo dove è situato il nostro backend python
+  final String _baseUrl = AppConstants.apiBaseUrl; // cardiogurd BE
 
   Future<DiagnosisResult> predictDisease({
     required int age,
@@ -23,32 +25,37 @@ class AIService {
     required String thal, // Thalassemia
     required int ca, // Number of vessels
   }) async {
-    final response = await http.post(
-      Uri.parse('$_baseUrl/predict'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'age': age,
-        'trestbps': trestbps,
-        'chol': chol,
-        'thalch': thalch,
-        'oldpeak': oldpeak,
-        'sex': sex,
-        'cp': cp,
-        'fbs': fbs,
-        'restecg': restecg,
-        'exang': exang,
-        'slope': slope,
-        'thal': thal,
-        'ca': ca,
-      }),
-    ).timeout(const Duration(seconds: 15)); // Timeout di 15 secondi
+    final body = jsonEncode({
+      'age': age,
+      'trestbps': trestbps,
+      'chol': chol,
+      'thalch': thalch,
+      'oldpeak': oldpeak,
+      'sex': sex,
+      'cp': cp,
+      'fbs': fbs,
+      'restecg': restecg,
+      'exang': exang,
+      'slope': slope,
+      'thal': thal,
+      'ca': ca,
+    });
 
-    if (response.statusCode == 200) {
-      // Parsing JSON pulito nel modello
-      return DiagnosisResult.fromJson(jsonDecode(response.body));
-    } else {
-      debugPrint('Errore API (${response.statusCode}): ${response.body}');
-      throw Exception('Errore ${response.statusCode}: ${response.body}');
+    try {
+      final response = await http.post(
+        Uri.parse('$_baseUrl/predict'),
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      ).timeout(const Duration(seconds: 90)); 
+
+
+      if (response.statusCode == 200) {
+        return DiagnosisResult.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('Errore ${response.statusCode}: ${response.body}');
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }
