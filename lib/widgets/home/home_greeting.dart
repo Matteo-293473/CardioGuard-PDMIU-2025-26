@@ -7,22 +7,19 @@ class HomeGreeting extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userAsync = ref.watch(userProvider);
+    final user = ref.watch(userProvider);
     
-    return userAsync.when(
-      data: (user) {
-        final name = user?.name ?? "";
-        return Text(
-          name.isEmpty ? 'Benvenuto in CardioGuard!' : 'Benvenuto, $name!',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            letterSpacing: 0.5,
-          ),
-          textAlign: TextAlign.center,
-        );
-      },
-      loading: () => const Text('Caricamento...'),
-      error: (_, __) => const Text('Benvenuto in CardioGuard!'),
+    final name = user?.name ?? "";
+    final sex = user?.sex ?? 1;
+    final greeting = sex == 0 ? 'Benvenuta' : 'Benvenuto';
+
+    return Text(
+      name.isEmpty ? 'Benvenuto in CardioGuard!' : '$greeting, $name!',
+      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+        fontWeight: FontWeight.bold,
+        letterSpacing: 0.5,
+      ),
+      textAlign: TextAlign.center,
     );
   }
 }

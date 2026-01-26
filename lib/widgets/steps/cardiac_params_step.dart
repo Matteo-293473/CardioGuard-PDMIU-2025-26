@@ -5,7 +5,7 @@ class CardiacParamsStep extends StatelessWidget {
   final TextEditingController thalachController;
   final TextEditingController oldpeakController;
   final String slope;
-  final ValueChanged<String> onSlopeChanged;
+  final void Function(String) onSlopeChanged;
 
   const CardiacParamsStep({
     super.key,

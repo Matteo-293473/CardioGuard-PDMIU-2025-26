@@ -19,4 +19,5 @@ class AppConstants {
 
   // UI 
   static const double defaultRadius = 15.0;
+  static const double bigScreenBreakpoint = 1000.0;
 }

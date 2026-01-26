@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'app_constants.dart';
 import 'settings_screen.dart';
 import 'widgets/home/air_quality_widget.dart';
 import 'widgets/home/home_drawer.dart';
@@ -13,7 +14,10 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    final mediaQuery = MediaQuery.of(context);
+    final isPortrait = mediaQuery.orientation == Orientation.portrait;
+    final isLarge = mediaQuery.size.width > AppConstants.bigScreenBreakpoint;
+    final isLandscapeMobile = !isPortrait && !isLarge;
 
     return Scaffold(
       appBar: AppBar(
@@ -34,17 +38,17 @@ class MyHomePage extends StatelessWidget {
       drawer: const HomeDrawer(),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: EdgeInsets.symmetric(vertical: isLandscapeMobile ? 10 : 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              HeartbeatLogo(height: isPortrait ? 120 : 80),
+              HeartbeatLogo(height: isLarge ? 200 : (isPortrait ? 120 : 60)),
               
               const SizedBox(height: 8),
               
               const HomeGreeting(),
               
-              const SizedBox(height: 40),
+              SizedBox(height: isLandscapeMobile ? 16 : 40),
               
               // sezione dedicata API ambiente+geocoding
               const Padding(
@@ -57,12 +61,12 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
               
-              const SizedBox(height: 32),
+              SizedBox(height: isLandscapeMobile ? 12 : 32),
               
               // azioni rapide - Le mie misurazioni e Analisi AI
               const HomeButtons(),
               
-              const SizedBox(height: 50),
+              SizedBox(height: isLandscapeMobile ? 20 : 50),
               Text(
                 'Uniurb Informatica e Innovazione Digitale 2025-2026',
                 style: TextStyle(

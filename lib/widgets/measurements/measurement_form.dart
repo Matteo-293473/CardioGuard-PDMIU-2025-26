@@ -102,7 +102,7 @@ class _MeasurementFormState extends ConsumerState<MeasurementForm> {
               const SizedBox(height: 20),
               FilledButton.icon(
                 onPressed: _saveMeasurement,
-                icon: const Icon(Icons.add, size: 20),
+                icon: const Icon(Icons.add),
                 label: const Text('Aggiungi Misurazione'),
               ),
             ],

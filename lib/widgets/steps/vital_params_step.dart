@@ -5,7 +5,7 @@ class VitalParamsStep extends StatelessWidget {
   final TextEditingController trestbpsController;
   final TextEditingController cholController;
   final String fbs;
-  final ValueChanged<String> onFbsChanged;
+  final void Function(String) onFbsChanged;
 
   const VitalParamsStep({
     super.key,

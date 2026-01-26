@@ -8,45 +8,49 @@ class HomeButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth > 600;
 
-    final measurementsButton = _buildHomeButton(
-      context,
-      isPortrait ? 'Le mie Misurazioni' : 'Misurazioni',
-      Icons.monitor_heart_outlined,
-      Colors.blue,
-      () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const MeasurementsScreen()),
-      ),
-    );
+        final measurementsButton = _buildHomeButton(
+          context,
+          isWide ? 'Le mie Misurazioni' : 'Misurazioni',
+          Icons.monitor_heart_outlined,
+          Colors.blue,
+          () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const MeasurementsScreen()),
+          ),
+        );
 
-    final aiButton = _buildHomeButton(
-      context,
-      'Analisi AI',
-      Icons.analytics_outlined,
-      Colors.red,
-      () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const DiagnosisScreen()),
-      ),
-    );
+        final aiButton = _buildHomeButton(
+          context,
+          'Analisi AI',
+          Icons.analytics_outlined,
+          Colors.red,
+          () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const DiagnosisScreen()),
+          ),
+        );
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: isPortrait
-          ? Column(
-              children: [
-                measurementsButton,
-                const SizedBox(height: 12),
-                aiButton,
-              ],
-            )
-          : Row(
-              children: [
-                Expanded(child: measurementsButton),
-                const SizedBox(width: 12),
-                Expanded(child: aiButton),
-              ],
-            ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: isWide
+              ? Row(
+                  children: [
+                    Expanded(child: measurementsButton),
+                    const SizedBox(width: 24),
+                    Expanded(child: aiButton),
+                  ],
+                )
+              : Column(
+                  children: [
+                    measurementsButton,
+                    const SizedBox(height: 12),
+                    aiButton,
+                  ],
+                ),
+        );
+      },
     );
   }
 
@@ -57,24 +61,19 @@ class HomeButtons extends StatelessWidget {
     Color color,
     VoidCallback onPressed,
   ) {
-    return SizedBox(
-      width: double.infinity,
-      height: 52,
-      child: FilledButton.icon(
-        onPressed: onPressed,
-        style: FilledButton.styleFrom(
-          backgroundColor: color,
-          foregroundColor: Colors.white,
-          elevation: 0, // piatto -> stile moderno
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultRadius)
-          ),
-        ),
-        icon: Icon(icon, size: 20),
-        label: Text(
-          label,
-          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-        ),
+    return FilledButton.icon(
+      onPressed: onPressed,
+      style: FilledButton.styleFrom(
+        backgroundColor: color,
+        foregroundColor: Colors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppConstants.defaultRadius)),
+      ),
+      icon: Icon(icon),
+      label: Text(
+        label,
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }

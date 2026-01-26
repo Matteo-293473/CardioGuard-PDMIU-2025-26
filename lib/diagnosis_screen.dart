@@ -50,12 +50,12 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
     _oldpeakController = TextEditingController(text: '1.0');
     
 
-    ref.read(userProvider.future).then((user) {
-      if (!mounted || user == null || _prefilledFromUser) return;
+    final user = ref.read(userProvider);
+    if (user != null && !_prefilledFromUser) {
       _ageController.text = user.age.toString();
-      setState(() => _sex = user.sex == 1 ? 'Male' : 'Female');
+      _sex = user.sex == 1 ? 'Male' : 'Female';
       _prefilledFromUser = true;
-    });
+    }
   }
 
   @override

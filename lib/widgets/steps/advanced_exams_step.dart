@@ -5,10 +5,10 @@ class AdvancedExamsStep extends StatelessWidget {
   final String exang;
   final String thal;
   final int ca;
-  final ValueChanged<String> onRestecgChanged;
-  final ValueChanged<String> onExangChanged;
-  final ValueChanged<String> onThalChanged;
-  final ValueChanged<int> onCaChanged;
+  final void Function(String) onRestecgChanged;
+  final void Function(String) onExangChanged;
+  final void Function(String) onThalChanged;
+  final void Function(int) onCaChanged;
 
   const AdvancedExamsStep({
     super.key,
@@ -51,7 +51,12 @@ class AdvancedExamsStep extends StatelessWidget {
         DropdownButtonFormField<int>(
           value: ca,
           decoration: const InputDecoration(labelText: 'Vasi Colorati (CA)'),
-          items: [0, 1, 2, 3].map((v) => DropdownMenuItem(value: v, child: Text('$v'))).toList(),
+          items: const [
+            DropdownMenuItem(value: 0, child: Text('0')),
+            DropdownMenuItem(value: 1, child: Text('1')),
+            DropdownMenuItem(value: 2, child: Text('2')),
+            DropdownMenuItem(value: 3, child: Text('3')),
+          ],
           onChanged: (v) => onCaChanged(v!),
         ),
         const SizedBox(height: 16),

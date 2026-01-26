@@ -6,13 +6,15 @@ class AppTheme {
   static const Color _seedColor = Color(0xFF006064);
 
   // tema chiaro
-  static ThemeData get lightTheme => _buildTheme(Brightness.light);
+  static ThemeData get lightTheme => buildTheme(Brightness.light);
 
   // tema scuro
-  static ThemeData get darkTheme => _buildTheme(Brightness.dark);
+  static ThemeData get darkTheme => buildTheme(Brightness.dark);
 
-  // helper privato per costruire il tema evitando duplicazioni
-  static ThemeData _buildTheme(Brightness brightness) {
+  // helper pubblico per costruire il tema con scaling opzionale
+  static ThemeData buildTheme(Brightness brightness, {bool isLarge = false}) {
+    final scale = isLarge ? 1.4 : 1.0;
+
     final colorScheme = ColorScheme.fromSeed(
       seedColor: _seedColor,
       brightness: brightness,
@@ -21,19 +23,27 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
+        toolbarHeight: isLarge ? 80.0 : 56.0,
+        iconTheme: IconThemeData(
+          size: isLarge ? 32 : 24,
+          color: brightness == Brightness.dark ? Colors.white : null,
+        ),
+        foregroundColor: brightness == Brightness.dark ? Colors.white : null,
       ),
       cardTheme: CardThemeData(
         elevation: 2.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.defaultRadius)),
       ),
+      iconTheme: IconThemeData(size: 24.0 * scale),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          minimumSize: const Size.fromHeight(48),
+          minimumSize: Size.fromHeight(48 * scale),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.defaultRadius)),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 24 * scale, vertical: 12 * scale),
+          textStyle: TextStyle(fontSize: 14 * scale),
         ),
       ),
 
@@ -56,7 +66,7 @@ class AppTheme {
           borderSide: const BorderSide(color: _seedColor, width: 1),
         ),
         contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            EdgeInsets.symmetric(horizontal: 16 * scale, vertical: 12 * scale),
       ),
     );
   }

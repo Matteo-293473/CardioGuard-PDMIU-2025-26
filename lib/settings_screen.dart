@@ -35,8 +35,8 @@ class SettingsScreen extends ConsumerWidget {
                   subtitle: const Text('Abilita il tema scuro'),
                   secondary: Icon(isDark ? Icons.nightlight_round : Icons.wb_sunny),
                   value: isDark,
-                  onChanged: (value) {
-                    ref.read(themeProvider.notifier).toggleTheme();
+                  onChanged: (value) async {
+                    await ref.read(themeProvider.notifier).toggleTheme();
                   },
               ),
             ),

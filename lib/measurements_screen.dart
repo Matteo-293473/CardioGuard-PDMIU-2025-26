@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'app_constants.dart';
 import 'widgets/measurements/measurement_form.dart';
 import 'widgets/measurements/measurements_list.dart';
 
@@ -11,9 +12,9 @@ class MeasurementsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Le mie Misurazioni'),
       ),
-      body: OrientationBuilder(
-        builder: (context, orientation) {
-          final isPortrait = orientation == Orientation.portrait;
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isPortrait = constraints.maxWidth < 600;
           
           if (isPortrait) {
             return const Column(
@@ -28,18 +29,21 @@ class MeasurementsScreen extends StatelessWidget {
               ],
             );
           } else {
-            // layout orizzontale: form a sinistra, lista a destra
-            return const Row(
+            // Layout orizzontale
+            // Se lo schermo è molto grande (>1000), diamo più spazio al form (40%), altrimenti 350px
+            final formWidth = constraints.maxWidth > AppConstants.bigScreenBreakpoint ? constraints.maxWidth * 0.4 : 350.0;
+            
+            return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 350, // larghezza fissa per il form
-                  child: SingleChildScrollView(
+                  width: formWidth,
+                  child: const SingleChildScrollView(
                     child: MeasurementForm(),
                   ),
                 ),
-                VerticalDivider(width: 1),
-                Expanded(
+                const VerticalDivider(width: 1),
+                const Expanded(
                   child: MeasurementsList(),
                 ),
               ],

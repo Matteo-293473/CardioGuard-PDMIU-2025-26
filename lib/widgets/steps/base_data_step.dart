@@ -5,8 +5,8 @@ class BaseDataStep extends StatelessWidget {
   final TextEditingController ageController;
   final String sex;
   final String cp;
-  final ValueChanged<String> onSexChanged;
-  final ValueChanged<String> onCpChanged;
+  final void Function(String) onSexChanged;
+  final void Function(String) onCpChanged;
 
   const BaseDataStep({
     super.key,
@@ -26,16 +26,17 @@ class BaseDataStep extends StatelessWidget {
           controller: ageController, 
           label: 'Età', 
           icon: Icons.cake, 
-          min: 1, 
+          min: 10, 
           max: 120
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
           value: sex,
           decoration: const InputDecoration(labelText: 'Sesso', prefixIcon: Icon(Icons.wc)),
-          items: const ['Male', 'Female']
-              .map((s) => DropdownMenuItem(value: s, child: Text(s)))
-              .toList(),
+          items: const [
+            DropdownMenuItem(value: 'Male', child: Text('Male')),
+            DropdownMenuItem(value: 'Female', child: Text('Female')),
+          ],
           onChanged: (v) => onSexChanged(v!),
         ),
         const SizedBox(height: 16),

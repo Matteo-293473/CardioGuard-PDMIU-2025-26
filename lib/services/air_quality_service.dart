@@ -36,7 +36,12 @@ class AirQualityService {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        return AirQuality.fromJson(data, lat, lon, cityName);
+        return AirQuality.fromJson(
+          data, 
+          lat: lat, 
+          lon: lon, 
+          city: cityName
+        );
       } else {
         throw Exception('Errore API (${response.statusCode})');
       }

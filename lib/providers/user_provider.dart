@@ -1,27 +1,33 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/models/user.dart';
-import 'general_providers.dart';
+import 'prefs_providers.dart';
 
 // notifier user
-class UserNotifier extends AsyncNotifier<User?> {
-  @override
-  Future<User?> build() async {
+class UserNotifier extends Notifier<User?> {
+  static const _userKey = 'user_profile';
 
-    // carichiamo l'utente salvato
-    final repo = ref.watch(preferencesRepositoryProvider);
-    return repo.getUser();
+  @override
+  User? build() {
+    // carichiamo l'utente salvato in modo sincrono
+    final prefs = ref.read(sharedPreferencesProvider); // basta la lettura perché l'istanza non cambia (i dati sì)
+    final jsonStr = prefs.getString(_userKey);
+    
+    if (jsonStr == null) return null;
+    try {
+      return User.fromJson(jsonStr);
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<void> saveUser(User user) async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() async {
-      final repo = ref.read(preferencesRepositoryProvider);
-      await repo.saveUser(user);
-      return user;
-    });
+    final prefs = ref.read(sharedPreferencesProvider);
+    await prefs.setString(_userKey, user.toJson());
+    state = user;
   }
 }
 
-final userProvider = AsyncNotifierProvider<UserNotifier, User?>(() {
+final userProvider = NotifierProvider<UserNotifier, User?>(() {
   return UserNotifier();
 });
+

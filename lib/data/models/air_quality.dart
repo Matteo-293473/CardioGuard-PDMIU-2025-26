@@ -13,7 +13,7 @@ class AirQuality {
     this.city,
   });
 
-  factory AirQuality.fromJson(Map<String, dynamic> json, [double? lat, double? lon, String? city]) {
+  factory AirQuality.fromJson(Map<String, dynamic> json, {double? lat, double? lon, String? city}) {
     final rawAqi = json['current']['us_aqi'] as int;
     
     String desc;
