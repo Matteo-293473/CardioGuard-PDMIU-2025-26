@@ -29,8 +29,8 @@ class MeasurementsScreen extends StatelessWidget {
               ],
             );
           } else {
-            // Layout orizzontale
-            // Se lo schermo è molto grande (>1000), diamo più spazio al form (40%), altrimenti 350px
+            // layout orizzontale
+            // se lo schermo è molto grande (>1000), diamo più spazio al form (40%), altrimenti 350px
             final formWidth = constraints.maxWidth > AppConstants.bigScreenBreakpoint ? constraints.maxWidth * 0.4 : 350.0;
             
             return Row(

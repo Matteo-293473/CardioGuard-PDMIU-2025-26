@@ -5,12 +5,12 @@ import '../data/models/diagnosis_input.dart';
 
 import '../app_constants.dart';
 
-// 8. Provider per il servizio AI
+// provider per il servizio AI
 final aiServiceProvider = Provider<AIService>((ref) {
   return AIService();
 });
 
-// 9. Controller per la diagnosi (Logic + State)
+// controller per la diagnosi  
 class DiagnosisController extends AsyncNotifier<DiagnosisResult?> {
   @override
   DiagnosisResult? build() {
@@ -22,7 +22,7 @@ class DiagnosisController extends AsyncNotifier<DiagnosisResult?> {
     try {
       final aiService = ref.read(aiServiceProvider);
       
-      // Chiamata con Timeout gestita qui
+      // chiamata con timeout 
       final result = await aiService.predictDisease(
         age: input.age,
         trestbps: input.trestbps,

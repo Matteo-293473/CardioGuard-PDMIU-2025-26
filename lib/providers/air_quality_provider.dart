@@ -32,7 +32,7 @@ final airQualityProvider = FutureProvider<AirQuality>((ref) async {
     return await AirQualityService.fetchAirQuality(pos.latitude, pos.longitude);
   }
 
-  // Applichiamo il timeout a TUTTO il processo (GPS + API)
+  // applichiamo il timeout a GPS e API insieme
   return await _getAirQuality().timeout(
     const Duration(seconds: 10),
     onTimeout: () {

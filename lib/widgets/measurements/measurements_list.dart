@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../data/models/measurement.dart';
 import '../../providers/providers.dart';
 
 class MeasurementsList extends ConsumerWidget {
@@ -49,8 +48,8 @@ class MeasurementsList extends ConsumerWidget {
               leading: const CircleAvatar(
                 child: Icon(Icons.favorite, color: Colors.red),
               ),
-              title: Text('${m.systolic}/${m.diastolic} mmHg'),
-              subtitle: Text('$dateStr - ${m.pulse} BPM'),
+              title: Text('${m.systolic}/${m.diastolic} mmHg - ${m.pulse} BPM'),
+              subtitle: Text('$dateStr'),
               trailing: IconButton(
                 icon: const Icon(Icons.delete_outline, color: Colors.red),
                 onPressed: () => _confirmDelete(context, ref, m.id!),

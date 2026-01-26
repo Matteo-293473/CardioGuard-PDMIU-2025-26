@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
@@ -19,6 +20,10 @@ class DatabaseService {
     String path;
     
     if (defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.linux) {
+      // Inizializzazione per Desktop
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+
       // getApplicationSupportDirectory per Windows e Linux
       final dir = await getApplicationSupportDirectory();
       path = join(dir.path, 'cardioguard.db');

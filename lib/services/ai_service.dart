@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../data/models/diagnosis_result.dart';
-
 import '../app_constants.dart';
 
 class AIService {
