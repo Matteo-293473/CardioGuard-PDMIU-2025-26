@@ -31,8 +31,8 @@ class DiagnosisInput {
     required this.ca,
   });
 
-  /// Factory method to create DiagnosisInput from controllers and values.
-  /// Throws FormatException if parsing fails.
+  /// metodo factory che permette di creare un DiagnosisInput da controller e valori.
+  /// Lancio errore se fallisce la validazione (formato errato)
   static DiagnosisInput fromControllers({
     required TextEditingController age,
     required TextEditingController trestbps,
