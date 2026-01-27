@@ -16,6 +16,7 @@ class MeasurementRepository {
       orderBy: 'timestamp DESC',
     );
 
+    // ciclo, prendiamo ogni elemento e aggiugniamo alla lista
     return List.generate(maps.length, (i) {
       return Measurement.fromMap(maps[i]);
     });
