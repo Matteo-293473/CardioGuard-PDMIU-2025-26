@@ -42,15 +42,20 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              HeartbeatLogo(height: isLarge ? 200 : (isPortrait ? 120 : 60)),
+
+              // sezione logo
+              HeartbeatLogo(
+                height: (mediaQuery.size.height * 0.15).clamp(80.0, 200.0),
+              ),
               
               const SizedBox(height: 8),
-              
+
+              // sezione scritta benvenuto personalizzata
               const HomeGreeting(),
               
               SizedBox(height: isLandscapeMobile ? 16 : 40),
               
-              // sezione dedicata API ambiente+geocoding
+              // sezione dedicata API - aria ambiente+geocoding
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -67,6 +72,8 @@ class MyHomePage extends StatelessWidget {
               const HomeButtons(),
               
               SizedBox(height: isLandscapeMobile ? 20 : 50),
+
+              // footer
               Text(
                 'Uniurb Informatica e Innovazione Digitale 2025-2026',
                 style: TextStyle(
