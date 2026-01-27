@@ -18,7 +18,7 @@ void main() async {
     // ProviderScope è la "radice" di Riverpod.
     ProviderScope(
       overrides: [
-        // Qui "iniettiamo" l'istanza di SharedPreferences dentro Riverpod.
+        // qui "iniettiamo" l'istanza di SharedPreferences dentro Riverpod.
         // sharedPreferencesProvider nel codice diventa: "usa QUESTO prefs già pronto".
         // Risultato: tutti i provider che dipendono da sharedPreferencesProvider non devono più fare getInstance().
         sharedPreferencesProvider.overrideWithValue(prefs),
@@ -45,19 +45,16 @@ class MyApp extends ConsumerWidget {
       themeMode: themeMode,
       builder: (context, child) {
         final mediaQuery = MediaQuery.of(context);
-        // recuperiamo la brightness per il tema
-        // Non supportiamo più ThemeMode.system, usiamo Light come default se non specificato
-        Brightness effectiveBrightness = Brightness.light;
-        if (themeMode == ThemeMode.dark) effectiveBrightness = Brightness.dark;
-
-        // zoom su tutto per riempere lo spazio dello schermo
+        
+        // zoom su tutto per riempere lo spazio dello schermo se > breakpoint
         final targetWidth = AppConstants.bigScreenBreakpoint;
         final realWidth = mediaQuery.size.width;
 
+        // se si supera il breakpoint, allora zoomiamo
         if (realWidth > targetWidth) {
            final scaleFactor = realWidth / targetWidth;
            
-           // Calcoliamo la nuova altezza logica per mantenere l'aspect ratio
+           // calcolo la nuova altezza per mantenere l'aspect ratio
            final newHeight = mediaQuery.size.height / scaleFactor;
            
            return FittedBox(
@@ -73,21 +70,14 @@ class MyApp extends ConsumerWidget {
                    // Reset del textScaler perché lo zoom lo fa già il FittedBox
                    textScaler: TextScaler.noScaling,
                  ),
-                 // Usiamo il tema standard (senza scaling manuale)
-                 child: Theme(
-                   data: AppTheme.buildTheme(effectiveBrightness, isLarge: false),
-                   child: child!,
-                 ),
+                 child: child!,
                ),
              ),
            );
         }
 
-        // Caso Mobile / Piccolo: Comportamento Standard
-        return Theme(
-           data: AppTheme.buildTheme(effectiveBrightness, isLarge: false),
-           child: child!,
-        );
+        // caso smartphone, no zoom 
+        return child!;
       },
       home: const MyHomePage(),
     );
