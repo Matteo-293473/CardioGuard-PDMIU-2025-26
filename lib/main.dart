@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-
-import 'package:flutter/foundation.dart';
 import 'providers/providers.dart';
 import 'theme/app_theme.dart';
 import 'home_screen.dart';
