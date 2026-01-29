@@ -42,17 +42,16 @@ class MyApp extends ConsumerWidget {
       title: 'CardioGuard',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: themeMode,
+      themeMode: themeMode, // se il tema cambia, MaterialApp viene ri-renderizzato
       builder: (context, child) {
         final mediaQuery = MediaQuery.of(context);
         
-        // zoom su tutto per riempere lo spazio dello schermo se > breakpoint
-        final targetWidth = AppConstants.bigScreenBreakpoint;
+        // zoom su tutto per riempire lo spazio dello schermo se > breakpoint
         final realWidth = mediaQuery.size.width;
 
         // se si supera il breakpoint, allora zoomiamo
-        if (realWidth > targetWidth) {
-           final scaleFactor = realWidth / targetWidth;
+        if (realWidth > AppConstants.bigScreenBreakpoint) {
+           final scaleFactor = realWidth / AppConstants.bigScreenBreakpoint;
            
            // calcolo la nuova altezza per mantenere l'aspect ratio
            final newHeight = mediaQuery.size.height / scaleFactor;
@@ -61,7 +60,7 @@ class MyApp extends ConsumerWidget {
              fit: BoxFit.contain,
              alignment: Alignment.topCenter,
              child: SizedBox(
-               width: targetWidth,
+               width: AppConstants.bigScreenBreakpoint,
                height: newHeight,
                child: MediaQuery(
                  data: mediaQuery.copyWith(

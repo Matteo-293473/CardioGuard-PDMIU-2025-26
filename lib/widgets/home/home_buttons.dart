@@ -8,49 +8,45 @@ class HomeButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isWide = constraints.maxWidth > 600;
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
-        final measurementsButton = _buildHomeButton(
-          context,
-          isWide ? 'Le mie Misurazioni' : 'Misurazioni',
-          Icons.monitor_heart_outlined,
-          Colors.blue,
-          () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const MeasurementsScreen()),
-          ),
-        );
+    final measurementsButton = _buildHomeButton(
+      context,
+      isLandscape ? 'Le mie Misurazioni' : 'Misurazioni',
+      Icons.monitor_heart_outlined,
+      Colors.blue,
+      () => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const MeasurementsScreen()),
+      ),
+    );
 
-        final aiButton = _buildHomeButton(
-          context,
-          'Analisi AI',
-          Icons.analytics_outlined,
-          Colors.red,
-          () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const DiagnosisScreen()),
-          ),
-        );
+    final aiButton = _buildHomeButton(
+      context,
+      'Analisi AI',
+      Icons.analytics_outlined,
+      Colors.red,
+      () => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const DiagnosisScreen()),
+      ),
+    );
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: isWide
-              ? Row(
-                  children: [
-                    Expanded(child: measurementsButton),
-                    const SizedBox(width: 24),
-                    Expanded(child: aiButton),
-                  ],
-                )
-              : Column(
-                  children: [
-                    measurementsButton,
-                    const SizedBox(height: 12),
-                    aiButton,
-                  ],
-                ),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: isLandscape
+          ? Row(
+              children: [
+                Expanded(child: measurementsButton),
+                const SizedBox(width: 24),
+                Expanded(child: aiButton),
+              ],
+            )
+          : Column(
+              children: [
+                measurementsButton,
+                const SizedBox(height: 12),
+                aiButton,
+              ],
+            ),
     );
   }
 
