@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import '../common/custom_text_field.dart';
 
-class UserProfileEditForm extends StatelessWidget {
+class UserProfileEditInfo extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
   final TextEditingController ageController;
   final int sex;
   final void Function(int?) onSexChanged;
 
-  const UserProfileEditForm({
+  const UserProfileEditInfo({
     super.key,
     required this.formKey,
     required this.nameController,

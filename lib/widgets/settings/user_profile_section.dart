@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/user.dart';
 import '../../providers/providers.dart';
 import 'user_profile_read_info.dart';
-import 'user_profile_edit_form.dart';
+import 'user_profile_edit_info.dart';
 import '../common/header_section.dart';
 
 class UserProfileSection extends ConsumerStatefulWidget {
@@ -120,7 +120,7 @@ class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: showEditForm 
-              ? UserProfileEditForm(
+              ? UserProfileEditInfo(
                   formKey: _formKey,
                   nameController: _nameController,
                   ageController: _ageController,
