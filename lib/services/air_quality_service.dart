@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'geocoding_service.dart';
 import '../data/models/air_quality.dart';
 import '../app_constants.dart';
 
@@ -8,26 +9,8 @@ class AirQualityService {
     final url = Uri.parse(
         '${AppConstants.airQualityApiUrl}?latitude=$lat&longitude=$lon&current=us_aqi');
     
-    String? cityName;
-    try {
-      // usiamo Nominatim per avere il nome della città da lat e lon
-      final geoUrl = Uri.parse(
-          '${AppConstants.geocodingApiUrl}?format=json&lat=$lat&lon=$lon&zoom=10&addressdetails=1');
-      
-      final geoResponse = await http.get(geoUrl, headers: {
-        'User-Agent': AppConstants.appUserAgent, // Nominatim richiede questo tipo di header
-      }).timeout(const Duration(seconds: AppConstants.geocodingTimeoutSeconds));
-
-      if (geoResponse.statusCode == 200) {
-        final geoData = jsonDecode(geoResponse.body);
-        final address = geoData['address'];
-        if (address != null) {
-          cityName = address['city'] ?? address['town'] ?? address['village'] ?? address['municipality'] ?? address['county'];
-        }
-      }
-    } catch (e) {
-      // ignoriamo gli errori di geocoding
-    }
+    // Otteniamo il nome della città usando il servizio dedicato
+    String? cityName = await GeocodingService.getCityName(lat, lon);
 
     // qui abbiamo la città. Ora dobbiamo ricavare le informazioni relative all'aria
     try {
