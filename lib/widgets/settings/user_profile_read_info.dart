@@ -13,8 +13,7 @@ class UserProfileReadInfo extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           leading: const Icon(Icons.person),
           title: const Text("Nome"),
-          subtitle: Text(user.name,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          subtitle: Text(user.name, style: const TextStyle(fontSize: 16)),
         ),
         const Divider(),
         Row(
