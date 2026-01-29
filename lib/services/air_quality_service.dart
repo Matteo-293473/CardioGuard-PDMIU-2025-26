@@ -15,7 +15,7 @@ class AirQualityService {
           '${AppConstants.geocodingApiUrl}?format=json&lat=$lat&lon=$lon&zoom=10&addressdetails=1');
       
       final geoResponse = await http.get(geoUrl, headers: {
-        'User-Agent': AppConstants.appUserAgent, // Nominatin richieste questo tipo di header
+        'User-Agent': AppConstants.appUserAgent, // Nominatim richiede questo tipo di header
       }).timeout(const Duration(seconds: AppConstants.geocodingTimeoutSeconds));
 
       if (geoResponse.statusCode == 200) {

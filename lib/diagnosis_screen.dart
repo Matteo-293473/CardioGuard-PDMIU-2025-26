@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'providers/providers.dart';
-import 'data/models/user.dart';
 import 'data/models/diagnosis_input.dart';
 import 'widgets/diagnosis/diagnosis_overlay.dart';
 import 'widgets/steps/base_data_step.dart';
@@ -172,13 +171,13 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
                                  minimumSize: const Size(0, 48),
                                ),
                                onPressed: details.onStepContinue,
-                               child: Text(_currentStep == 3 ? 'CALCOLA RISCHIO' : 'CONTINUA'),
+                               child: Text(_currentStep == 3 ? 'Calcola Rischio' : 'Continua'),
                              ),
                              if (_currentStep > 0) ...[
                                const SizedBox(width: 12),
                                TextButton(
                                  onPressed: details.onStepCancel,
-                                 child: const Text('INDIETRO'),
+                                 child: const Text('Indietro'),
                                ),
                              ],
                            ],

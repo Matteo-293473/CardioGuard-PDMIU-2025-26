@@ -39,7 +39,7 @@ class UserProfileEditForm extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownButtonFormField<int>(
-            value: sex,
+            initialValue: sex,
             decoration: const InputDecoration(labelText: 'Sesso'),
             items: const [
               DropdownMenuItem(value: 1, child: Text('Maschio')),

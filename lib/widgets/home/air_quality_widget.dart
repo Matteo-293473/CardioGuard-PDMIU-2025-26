@@ -14,7 +14,7 @@ class AirQualityWidget extends ConsumerWidget {
       data: (aq) => Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: _getAqiColor(aq.aqi).withOpacity(0.1),
+          color: _getAqiColor(aq.aqi).withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
           border: Border.all(color: _getAqiColor(aq.aqi), width: 2),
         ),
@@ -70,6 +70,7 @@ class AirQualityWidget extends ConsumerWidget {
       Colors.purple,
     ];
     // se aqi è valido -> colore, altrimenti grigio
+    // -1 perché l'array parte da 0 e l'aqi da 1
     if (aqi >= 1 && aqi <= colors.length) return colors[aqi - 1];
     return Colors.grey;
   }

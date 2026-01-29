@@ -9,7 +9,7 @@ class DiagnosisLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black.withOpacity(0.85),
+      color: Colors.black.withValues(alpha: 0.85),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -23,7 +23,7 @@ class DiagnosisLoadingWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
-            Text(
+            const Text(
               'Analisi AI in corso...',
               style: TextStyle(
                 color: Colors.tealAccent,

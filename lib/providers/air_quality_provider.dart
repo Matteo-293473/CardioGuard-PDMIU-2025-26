@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import '../services/air_quality_service.dart';
@@ -24,7 +23,7 @@ final locationProvider = FutureProvider<Position>((ref) async {
 // sezione relativa alla qualità dell'aria in base alla posizione dell'utente
 final airQualityProvider = FutureProvider<AirQuality>((ref) async {
 
-  Future<AirQuality> _getAirQuality() async {
+  Future<AirQuality> getAirQuality() async {
     // otteniamo la posizione
     final pos = await ref.watch(locationProvider.future);
     
@@ -33,7 +32,7 @@ final airQualityProvider = FutureProvider<AirQuality>((ref) async {
   }
 
   // applichiamo il timeout a GPS e API insieme
-  return await _getAirQuality().timeout(
+  return await getAirQuality().timeout(
     const Duration(seconds: 10),
     onTimeout: () {
       throw Exception('Timeout totale (10s)');

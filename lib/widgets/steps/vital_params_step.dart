@@ -37,7 +37,7 @@ class VitalParamsStep extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
-          value: fbs,
+          initialValue: fbs,
           decoration: const InputDecoration(labelText: 'Glicemia > 120 mg/dl (FBS)'),
           items: const [
             DropdownMenuItem(value: 'false', child: Text('No')),

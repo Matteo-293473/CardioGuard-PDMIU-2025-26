@@ -48,7 +48,7 @@ class AIService {
 
 
       if (response.statusCode == 200) {
-        return DiagnosisResult.fromJson(jsonDecode(response.body));
+        return DiagnosisResult.fromJson(jsonDecode(response.body)); // converte risposta in oggetto DiagnosisResult
       } else {
         throw Exception('Errore ${response.statusCode}: ${response.body}');
       }

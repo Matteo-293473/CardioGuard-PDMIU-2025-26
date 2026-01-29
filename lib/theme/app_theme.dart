@@ -51,8 +51,8 @@ class AppTheme {
         filled: true,
         // adattiamo il colore di sfondo in base al tema
         fillColor: brightness == Brightness.light
-            ? Colors.grey.withOpacity(0.05)
-            : Colors.white.withOpacity(0.05),
+            ? Colors.grey.withValues(alpha: 0.05)
+            : Colors.white.withValues(alpha: 0.05),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
           borderSide: BorderSide.none,

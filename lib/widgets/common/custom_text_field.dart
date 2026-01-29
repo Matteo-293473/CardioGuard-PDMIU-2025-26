@@ -40,6 +40,7 @@ class CustomTextField extends StatelessWidget {
         helperText: (min != null && max != null) ? 'Range: ${min!.toInt()} - ${max!.toInt()}' : null,
       ),
       keyboardType: keyboardType ?? (onlyText ? TextInputType.name : TextInputType.numberWithOptions(decimal: !isInteger)),
+      // per la validazione possiamo passarne una oppure viene gestita qui
       validator: validator ?? (v) {
         if (v == null || v.trim().isEmpty) return 'Campo obbligatorio';
         if (onlyText) {

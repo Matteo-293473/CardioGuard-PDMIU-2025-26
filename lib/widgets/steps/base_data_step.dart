@@ -31,7 +31,7 @@ class BaseDataStep extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
-          value: sex,
+          initialValue: sex,
           decoration: const InputDecoration(labelText: 'Sesso', prefixIcon: Icon(Icons.wc)),
           items: const [
             DropdownMenuItem(value: 'Male', child: Text('Male')),
@@ -41,7 +41,7 @@ class BaseDataStep extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
-          value: cp,
+          initialValue: cp,
           decoration: const InputDecoration(labelText: 'Tipo Dolore Toracico (CP)'),
           items: const [
             DropdownMenuItem(value: 'asymptomatic', child: Text('Asintomatico')),

@@ -85,7 +85,7 @@ class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
             if (!showEditForm)
               IconButton(
                 icon: const Icon(Icons.edit, size: 20),
-                onPressed: () => _startEditing(currentUser!),
+                onPressed: () => _startEditing(currentUser),
                 tooltip: 'Modifica Profilo',
                 color: Theme.of(context).colorScheme.primary,
               )
@@ -126,7 +126,7 @@ class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
                   sex: _sex,
                   onSexChanged: (val) => setState(() => _sex = val!),
                 )
-              : UserProfileReadInfo(user: currentUser!),
+              : UserProfileReadInfo(user: currentUser),
           ),
         ),
       ],

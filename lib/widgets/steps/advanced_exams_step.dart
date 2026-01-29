@@ -28,7 +28,7 @@ class AdvancedExamsStep extends StatelessWidget {
       children: [
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: restecg,
+          initialValue: restecg,
           decoration: const InputDecoration(labelText: 'ECG a Riposo'),
           items: const [
             DropdownMenuItem(value: 'normal', child: Text('Normale')),
@@ -39,7 +39,7 @@ class AdvancedExamsStep extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
-          value: exang,
+          initialValue: exang,
           decoration: const InputDecoration(labelText: 'Angina da Sforzo'),
           items: const [
             DropdownMenuItem(value: 'false', child: Text('No')),
@@ -49,7 +49,7 @@ class AdvancedExamsStep extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<int>(
-          value: ca,
+          initialValue: ca,
           decoration: const InputDecoration(labelText: 'Vasi Colorati (CA)'),
           items: const [
             DropdownMenuItem(value: 0, child: Text('0')),
@@ -61,7 +61,7 @@ class AdvancedExamsStep extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
-          value: thal,
+          initialValue: thal,
           decoration: const InputDecoration(labelText: 'Talassemia'),
           items: const [
             DropdownMenuItem(value: 'normal', child: Text('Normale')),

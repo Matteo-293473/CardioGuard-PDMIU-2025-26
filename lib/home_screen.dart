@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app_constants.dart';
 import 'settings_screen.dart';
 import 'widgets/home/air_quality_widget.dart';

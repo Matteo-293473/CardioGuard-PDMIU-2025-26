@@ -37,7 +37,7 @@ class CardiacParamsStep extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
-          value: slope,
+          initialValue: slope,
           decoration: const InputDecoration(labelText: 'Pendenza ST (Slope)'),
           items: const [
             DropdownMenuItem(value: 'flat', child: Text('Piatta (Flat)')),

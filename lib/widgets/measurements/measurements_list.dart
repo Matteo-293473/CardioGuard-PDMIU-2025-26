@@ -49,7 +49,7 @@ class MeasurementsList extends ConsumerWidget {
                 child: Icon(Icons.favorite, color: Colors.red),
               ),
               title: Text('${m.systolic}/${m.diastolic} mmHg - ${m.pulse} BPM'),
-              subtitle: Text('$dateStr'),
+              subtitle: Text(dateStr),
               trailing: IconButton(
                 icon: const Icon(Icons.delete_outline, color: Colors.red),
                 onPressed: () => _confirmDelete(context, ref, m.id!),
