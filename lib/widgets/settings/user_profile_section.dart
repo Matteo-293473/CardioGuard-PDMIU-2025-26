@@ -4,6 +4,7 @@ import '../../data/models/user.dart';
 import '../../providers/providers.dart';
 import 'user_profile_read_info.dart';
 import 'user_profile_edit_form.dart';
+import '../common/header_section.dart';
 
 class UserProfileSection extends ConsumerStatefulWidget {
   const UserProfileSection({super.key});
@@ -81,7 +82,7 @@ class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildSectionHeader(context, 'Profilo Utente'),
+            const HeaderSection(title: 'Profilo Utente'),
             if (!showEditForm)
               IconButton(
                 icon: const Icon(Icons.edit, size: 20),
@@ -130,19 +131,6 @@ class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildSectionHeader(BuildContext context, String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: Theme.of(context).colorScheme.primary,
-              fontWeight: FontWeight.bold,
-            ),
-      ),
     );
   }
 }
