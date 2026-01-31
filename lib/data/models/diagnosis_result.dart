@@ -1,3 +1,4 @@
+// modello per il risultato della diagnosi + metodo che converte il risultato in stringa
 class DiagnosisResult {
   final bool hasDisease; 
   final double confidence; 

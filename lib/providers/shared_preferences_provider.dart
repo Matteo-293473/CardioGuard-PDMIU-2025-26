@@ -1,3 +1,4 @@
+// provider per l'accesso alle SharedPreferences (utente + tema)
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,3 +1,4 @@
+// widget per visualizzare un'intestazione di sezione (nelle impostazioni) con stile coerente
 import 'package:flutter/material.dart';
 
 class HeaderSection extends StatelessWidget {

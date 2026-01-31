@@ -1,3 +1,4 @@
+// modello per i dati di input necessari alla classificazione 
 import 'package:flutter/widgets.dart';
 
 class DiagnosisInput {

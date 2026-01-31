@@ -1,3 +1,4 @@
+// modello dati per la qualità dell'aria + metodo che converte il risultato in stringa
 class AirQuality {
   final int aqi;
   final String description;

@@ -1,3 +1,4 @@
+// widget animato che visualizza il logo con un effetto battito
 import 'package:flutter/material.dart';
 
 class HeartbeatLogo extends StatefulWidget {

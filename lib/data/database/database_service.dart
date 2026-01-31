@@ -1,3 +1,4 @@
+// servizio per la gestione del database SQLite locale
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -18,12 +19,12 @@ class DatabaseService {
   Future<Database> _initDatabase() async {
     String path;
     
-    if (defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.linux) {
+    if (defaultTargetPlatform == TargetPlatform.windows) {
       // Inizializzazione per Desktop
       sqfliteFfiInit();
       databaseFactory = databaseFactoryFfi;
 
-      // getApplicationSupportDirectory per Windows e Linux
+      // getApplicationSupportDirectory per Windows
       final dir = await getApplicationSupportDirectory();
       path = join(dir.path, 'cardioguard.db');
     } else {

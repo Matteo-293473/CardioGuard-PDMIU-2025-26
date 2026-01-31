@@ -1,6 +1,7 @@
+// provider per la gestione e la persistenza del profilo utente
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/models/user.dart';
-import 'prefs_providers.dart';
+import 'shared_preferences_provider.dart';
 
 // notifier user
 class UserNotifier extends Notifier<User?> {

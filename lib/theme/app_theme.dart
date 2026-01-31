@@ -1,8 +1,9 @@
+// definizione del tema (Chiaro/Scuro) e delle decorazioni UI globali
 import 'package:flutter/material.dart';
 import '../app_constants.dart';
 
 class AppTheme {
-  // un colore seed per il tema
+  // colore seed per il tema
   static const Color _seedColor = Color(0xFF006064);
 
   // tema chiaro

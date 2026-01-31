@@ -1,3 +1,4 @@
+// Repository per la gestione delle operazioni CRUD sulle misurazioni.
 import '../models/measurement.dart';
 import '../database/database_service.dart';
 

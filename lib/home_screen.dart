@@ -1,3 +1,4 @@
+// schermata principale dell'applicazione
 import 'package:flutter/material.dart';
 import 'app_constants.dart';
 import 'settings_screen.dart';

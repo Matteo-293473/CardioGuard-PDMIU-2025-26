@@ -1,3 +1,4 @@
+// servizio per l'interazione con l'API di diagnosi AI (fastAPI)
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../data/models/diagnosis_result.dart';
@@ -5,7 +6,7 @@ import '../app_constants.dart';
 
 class AIService {
   
-  // Indirizzo dove è situato il nostro backend python
+  // indirizzo dove è situato il nostro backend python
   final String _baseUrl = AppConstants.apiBaseUrl; // cardiogurd BE
 
   Future<DiagnosisResult> predictDisease({

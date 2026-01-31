@@ -1,3 +1,4 @@
+// card per visualizzare il risultato finale della diagnosi
 import 'package:flutter/material.dart';
 import '../../data/models/diagnosis_result.dart';
 import '../../app_constants.dart';

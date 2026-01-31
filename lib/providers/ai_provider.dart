@@ -1,3 +1,4 @@
+// provider per la gestione della diagnosi tramite servizio classificazione backend
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/ai_service.dart';
 import '../data/models/diagnosis_result.dart';

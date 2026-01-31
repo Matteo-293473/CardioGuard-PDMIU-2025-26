@@ -1,6 +1,7 @@
+// provider per la gestione e la persistenza del tema dell'applicazione
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'prefs_providers.dart';
+import 'shared_preferences_provider.dart';
 
 // notifier tema
 class ThemeNotifier extends Notifier<ThemeMode> {

@@ -1,3 +1,4 @@
+// servizio per il reverse geocoding (OpenStreetMap Nominatim API)
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../app_constants.dart';

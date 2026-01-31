@@ -1,3 +1,4 @@
+// modello dati per una singola misurazione pressoria + metodi conversione
 class Measurement {
   final int? id;
   final int systolic;

@@ -1,3 +1,4 @@
+// widget lista scrollabile storico misurazioni
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -59,7 +60,7 @@ class MeasurementsList extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => const Center(child: Text('Si è verificato un errore nel caricamento dei dati.')),
+      error: (error, stack) => const Center(child: Text('Si è verificato un errore nel caricamento dei dati.')),
     );
   }
 }

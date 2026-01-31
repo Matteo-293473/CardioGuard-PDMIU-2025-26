@@ -1,3 +1,4 @@
+// widget info qualità aria nella home
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/air_quality_provider.dart';
@@ -48,7 +49,7 @@ class AirQualityWidget extends ConsumerWidget {
       ),
       loading: () => const CircularProgressIndicator(),
       // errore generico
-      error: (_, __) => const Row(
+      error: (error, stack) => const Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(Icons.warning_amber_rounded, color: Colors.orange),

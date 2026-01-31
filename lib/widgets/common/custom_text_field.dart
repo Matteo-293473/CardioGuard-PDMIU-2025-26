@@ -1,3 +1,5 @@
+// widget personalizzato per campi di testo con validazione integrata
+// logica + stile
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {

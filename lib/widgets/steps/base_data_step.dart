@@ -1,3 +1,4 @@
+// step 1 età, sesso, dolore toracico
 import 'package:flutter/material.dart';
 import '../common/custom_text_field.dart';
 

@@ -1,3 +1,4 @@
+// overlay che gestisce i diversi stati (caricamento, successo, errore) della diagnosi
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/diagnosis_result.dart';

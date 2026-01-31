@@ -1,3 +1,4 @@
+// schermata delle impostazioni per gestire il profilo utente e le preferenze grafiche.
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widgets/settings/user_profile_section.dart';

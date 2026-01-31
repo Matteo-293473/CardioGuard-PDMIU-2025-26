@@ -1,3 +1,4 @@
+// widget di caricamento per l'attesa della risposta del servizio backend
 import 'package:flutter/material.dart';
 
 class DiagnosisLoadingWidget extends StatelessWidget {

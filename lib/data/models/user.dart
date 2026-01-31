@@ -1,3 +1,4 @@
+// modello dati per le informazioni dell'utente + metodi per conversione
 import 'dart:convert';
 
 class User {

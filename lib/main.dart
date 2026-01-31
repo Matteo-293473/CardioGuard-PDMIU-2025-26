@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'providers/providers.dart';
 import 'theme/app_theme.dart';
-import 'home_screen.dart';
-
+import 'home_screen.dart';  
 import 'app_constants.dart';
+import 'dart:io';
+import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +14,18 @@ void main() async {
   // SharedPreferences: ottenere l'istanza è ASYNC (getInstance() ritorna Future).
   // Lo facciamo qui UNA VOLTA sola, prima di runApp, così il resto dell'app può usarla in modo "sincrono".
   final prefs = await SharedPreferences.getInstance();
+
+  if (Platform.isWindows) {
+    await windowManager.ensureInitialized();
+    WindowOptions windowOptions = const WindowOptions(
+      minimumSize: Size(400, 600),
+      title: 'CardioGuard',
+    );
+    await windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
 
   runApp(
     // ProviderScope è la "radice" di Riverpod.

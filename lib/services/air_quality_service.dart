@@ -1,3 +1,4 @@
+// servizio per il recupero dei dati sulla qualità dell'aria (Open-Meteo API)
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'geocoding_service.dart';

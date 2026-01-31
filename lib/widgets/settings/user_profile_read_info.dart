@@ -1,3 +1,4 @@
+// widget visualizzazione dati utente
 import 'package:flutter/material.dart';
 import '../../data/models/user.dart';
 

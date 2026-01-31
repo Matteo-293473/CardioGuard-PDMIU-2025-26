@@ -1,3 +1,4 @@
+// card per la visualizzazione di errori durante la diagnosi
 import 'package:flutter/material.dart';
 
 class DiagnosisErrorCard extends StatelessWidget {

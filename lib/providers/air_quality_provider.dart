@@ -1,3 +1,4 @@
+// provider per la gestione della posizione GPS e dei dati sulla qualità dell'aria
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import '../services/air_quality_service.dart';

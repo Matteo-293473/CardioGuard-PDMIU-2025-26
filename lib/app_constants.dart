@@ -1,8 +1,9 @@
+// costanti globali e configurazioni dell'applicazione.
 class AppConstants {
-  // Configurazione Backend
+  // configurazione Backend
   static const String apiBaseUrl = 'https://cardioguard-backend-v1.onrender.com';
   
-  // Secondi timeout 
+  // secondi timeout 
   static const int apiTimeoutSeconds = 90;
 
   // APIs
@@ -17,7 +18,7 @@ class AppConstants {
   // Backend
   static const String appUserAgent = 'CardioGuard-App/1.0';
 
-  // UI 
+  // UI
   static const double defaultRadius = 15.0;
   static const double bigScreenBreakpoint = 1000.0;
 }
