@@ -5,7 +5,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
 
 class DatabaseService {
+  // singleton semplice per il database
   static final DatabaseService _instance = DatabaseService._internal();
+
   static Database? _database;
 
   // torna una sola istanza (singleton)

@@ -56,33 +56,47 @@ Le schermate sono quattro:
 
 ### Librerie Utilizzate
 
-Per la realizzazione del progetto sono state utilizzate diverse librerie di seguito riportate:
+Per la realizzazione del progetto sono state utilizzate diverse librerie qui di seguito riportate:
 *   **flutter_riverpod**: usato per lo state management; consente di centralizzare lo stato e gestire in modo asincrono i dati (loading/error/data).
 *   **sqflite**: implementa un database SQLite locale per archiviare le misurazioni dell'utente da poter poi consultare in qualsiasi momento.
+*   **sqflite_common_ffi**: usato su Windows per abilitare SQLite su desktop (inizializzazione FFI del database).
 *   **http**: gestisce le richieste di rete verso il servizio AI in Python e le API esterne per la qualità dell'aria.
 *   **shared_preferences**: utilizzato per salvare le impostazioni utente semplici e  preferenze sul tema (chiaro/scuro).
 *   **geolocator**: recupera le coordinate del dispositivo per ottenere dati sulla qualità dell'aria nel luogo in cui si trova l'utente.
 *   **window_manager**: consente di impostare le dimensioni minime della finestra su desktop.
 
 ## **Scelte implementative**
-
-* **Repository Pattern**: la logica di accesso ai dati è incapsulata in MeasurementRepository, separando persistenza e UI.
-* **Riverpod AsyncNotifier**: usato per gestire la lista delle misurazioni e le operazioni CRUD sul database (insert/delete), mantenendo sincronizzato lo stato della UI (loading/error/data).
-* **Iniezione di SharedPreferences**: l’istanza viene inizializzata nel main() e fornita tramite ProviderScope(overrides: ...), così le impostazioni sono disponibili in modo sincrono ovunque.
-* **Design adattivo**: un wrapper basato su FittedBox nel builder di MaterialApp scala l’interfaccia su schermi grandi (tablet/desktop), mantenendo layout e leggibilità coerenti.
-* **Backend Remoto (FastAPI)**: la logica di Machine Learning è ospitata su un server remoto in Python per permettere l'esecuzione del modello di regressione logistica senza appesantire il client mobile.
+* **Separazione della logica dati (measurement repository)**: le operazioni sul database delle misurazioni (insert/read/delete) sono incapsulate in _MeasurementRepository_, così la UI non comunica direttamente con SQLite.
+* **Gestione dello stato con Riverpod**: uso _AsyncNotifier_ per la lista delle misurazioni e per la diagnosi AI, in modo da gestire loading / errore / dati e aggiornare la UI automaticamente.
+* **Preferenze (SharedPreferences)**: _SharedPreferences_ viene inizializzato in _main()_ prima di _runApp()_ e passato ai provider tramite _ProviderScope(overrides: ...)_, così tema e profilo utente sono leggibili senza schermate di caricamento.
+* **Interfaccia adattiva**: layout che cambia in base all’orientamento e, su schermi grandi, viene fatto uno scaling tramite _FittedBox_ nel _builder_ di _MaterialApp_.
 
 ## **Problemi riscontrati e soluzioni**
 
-* **Preferenze sincrone per il rendering (tema, impostazioni)**
+**Preferenze sincrone per la UI (tema, impostazioni)**
 
-  * **Problema**: _SharedPreferences.getInstance()_ è asincrono, ma alcune parti della UI (es. tema) hanno bisogno di valori immediati. Usare un _FutureProvider_ avrebbe imposto di gestire _AsyncValue_ e stati di caricamento anche per letture banali.
-  * **Soluzione**: inizializzazione di SharedPreferences prima di _runApp()_ e override nel _ProviderScope_. In questo modo il provider può essere sincrono e le impostazioni sono disponibili senza await o FutureBuilder.
+  * **Problema**: _SharedPreferences.getInstance()_ è asincrono. Inizializzare tema e profilo in modo async, richiede la gestione di _AsyncValue_ (loading/error) anche per leggere tema e profilo, aggiungendo complessità alla UI.
+  * **Soluzione**: inizializzo _SharedPreferences_ nel _main()_ prima di _runApp()_ e lo passo ai provider con _ProviderScope(overrides: ...)_, così tema e profilo sono disponibili subito senza _await_ o _FutureBuilder_.
 
-* **Ripetizione dei campi di input nella schermata di diagnosi**
+
+ **SQLite su Windows**
+
+  * **Problema**: usando _sqflite_ su Windows ho avuto limiti/problemi di inizializzazione.
+  * **Soluzione**: ho usato _sqflite_common_ffi_ con _sqfliteFfiInit()_ e _databaseFactoryFfi_ per far funzionare correttamente il database su desktop.
+
+
+**Validazione stepper (diagnosis_screen)**
+
+  * **Problema**: senza validazione per step l’utente poteva andare avanti anche con campi vuoti.
+  * **Soluzione**: ho usato un _Form_ per ogni step con _GlobalKey<FormState>_ e blocco l’avanzamento con _validate()_
+
+
+**Ripetizione dei campi di input nella schermata di diagnosi**
+
   * **Problema**: la gestione di numerosi _TextFormField_ simili comportava codice duplicato e difficile da manutenere; ogni modifica allo stile richiedeva aggiornamenti manuali su più widget.
   * **Soluzione**:  creazione di _CustomTextField_, un widget riutilizzabile che centralizza logica e design, riducendo le ripetizioni e facilitando modifiche globali.
 
-* **Adattabilità dell'interfaccia su schermi grandi (Desktop/Tablet)**
+**Adattabilità dell'interfaccia su schermi grandi**
+
   * **Problema**: su schermi ampi, il layout da mobile risultava troppo dispersivo, con elementi piccoli e molto spazio bianco inutilizzato.
-  * **Soluzione**: implementazione di un sistema di "scaling automatico" nel builder di MaterialApp. Se la larghezza supera un breakpoint definito, l'intera interfaccia viene racchiusa in un _FittedBox_ che ne aumenta proporzionalmente le dimensioni, simulando un effetto zoom mantenendo la nitidezza (aumentando il devicePixelRatio).
+  * **Soluzione**: ingrandimento del layout nel builder di MaterialApp quando la larghezza supera un breakpoint definito.
