@@ -18,6 +18,17 @@ Le schermate sono quattro:
 *   **Analisi AI**: sezione dove gli utenti inseriscono i propri dati clinici (età, colesterolo, tipo di dolore toracico, ecc.). Questi dati vengono inviati a un server remoto che li elabora e restituisce una valutazione del rischio (basso/alto rischio e percentuale di confidenza).
 *   **Impostazioni**: schermata di configurazione che permette di impostare il profilo utente e selezionare il tipo di tema (chiaro o scuro) dell'applicazione.
 
+## **User Experience**
+
+L'applicazione è progettata per essere intuitiva. Di seguito vengono riportate le operazioni principali:
+
+
+1.  **Monitoraggio della Pressione**: Dalla Home, l'utente accede alla sezione "Misurazioni". Qui compila un form essenziale (Sistolica, Diastolica, Battiti). Al salvataggio, la lista delle misurazioni si aggiorna istantaneamente mostrando la nuova voce in cima allo storico.
+2.  **Percorso di Diagnosi AI**: L'utente viene guidato attraverso uno *Stepper* in 4 fasi. Questa suddivisione in categorie logiche (Dati Base, Parametri Vitali, Cardiaci, Esami Avanzati) rende la compilazione dei parametri clinici fluida e riduce gli errori grazie alla validazione in tempo reale per ogni step.
+3.  **Gestione Preferenze**: Tramite uno switch nelle impostazioni, l'utente può passare dalla modalità chiara a quella scura. Il profilo utente può essere modificato direttamente passando dalla visualizzazione alla modifica con un singolo tasto.
+
+
+
 
 <table align="center">
   <tr>
