@@ -41,7 +41,7 @@ class DiagnosisResultCard extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                if (!isHealthy) // Solo se c'è rischio
+                if (!isHealthy) // solo se c'è rischio
                   Padding(
                     padding: const EdgeInsets.only(top: 4.0),
                     child: Text(

@@ -30,7 +30,7 @@ class BaseDataStep extends StatelessWidget {
           min: 10, 
           max: 120
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 25),
         DropdownButtonFormField<String>(
           initialValue: sex,
           decoration: const InputDecoration(labelText: 'Sesso', prefixIcon: Icon(Icons.wc)),
@@ -38,9 +38,9 @@ class BaseDataStep extends StatelessWidget {
             DropdownMenuItem(value: 'Male', child: Text('Male')),
             DropdownMenuItem(value: 'Female', child: Text('Female')),
           ],
-          onChanged: (v) => onSexChanged(v!),
+          onChanged: (newValue) => onSexChanged(newValue!),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 35),
         DropdownButtonFormField<String>(
           initialValue: cp,
           decoration: const InputDecoration(labelText: 'Tipo Dolore Toracico (CP)'),
@@ -50,7 +50,7 @@ class BaseDataStep extends StatelessWidget {
             DropdownMenuItem(value: 'non-anginal', child: Text('Dolore Non Anginoso')),
             DropdownMenuItem(value: 'typical angina', child: Text('Angina Tipica')),
           ],
-          onChanged: (v) => onCpChanged(v!),
+          onChanged: (newValue) => onCpChanged(newValue!),
         ),
       ],
     );

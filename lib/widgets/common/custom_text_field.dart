@@ -6,8 +6,8 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final IconData? icon;
-  final double? min;
-  final double? max;
+  final num? min;
+  final num? max;
   final String? suffixText;
   final bool isInteger;
   final String? Function(String?)? validator;
@@ -39,8 +39,9 @@ class CustomTextField extends StatelessWidget {
         suffixText: suffixText,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         prefixIcon: icon != null ? Icon(icon, color: Theme.of(context).colorScheme.primary) : null,
-        helperText: (min != null && max != null) ? 'Range: ${min!.toInt()} - ${max!.toInt()}' : null,
+        helperText: (min != null && max != null) ? 'Range: $min - $max' : null,
       ),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: keyboardType ?? (onlyText ? TextInputType.name : TextInputType.numberWithOptions(decimal: !isInteger)),
       // per la validazione possiamo passarne una oppure viene gestita qui
       validator: validator ?? (v) {
@@ -48,19 +49,20 @@ class CustomTextField extends StatelessWidget {
         if (onlyText) {
           // caso solo testo
           if (maxLength != null && v.trim().length > maxLength!) return 'Massimo $maxLength caratteri';
-          if (RegExp(r'[0-9]').hasMatch(v)) return 'Numeri non permessi';
+          if (RegExp(r'[0-9]').hasMatch(v)) return 'Numeri non permessi' ;
         } else {
           // caso intero
           if (isInteger) {
             final value = int.tryParse(v);
             if (value == null) return 'Inserire un numero intero';
-            if (min != null && value < min!) return 'Minimo: ${min!.toInt()}';
-            if (max != null && value > max!) return 'Massimo: ${max!.toInt()}';
+            if (min != null && value < min!) return 'Minimo: $min';
+            if (max != null && value > max!) return 'Massimo: $max';
           } else {
-            final value = double.tryParse(v);
+            // parsing con virgola o punto
+            final value = double.tryParse(v.replaceAll(',', '.'));
             if (value == null) return 'Inserire un numero valido';
-            if (min != null && value < min!) return 'Minimo: ${min!.toInt()}';
-            if (max != null && value > max!) return 'Massimo: ${max!.toInt()}';
+            if (min != null && value < min!) return 'Minimo: $min';
+            if (max != null && value > max!) return 'Massimo: $max';
           }
         }
         return null;

@@ -34,7 +34,7 @@ class DiagnosisInput {
 
   // metodo factory che permette di creare un DiagnosisInput da controller e valori.
   // Lancio errore se fallisce la validazione (formato errato)
-  static DiagnosisInput fromControllers({
+  factory DiagnosisInput.fromControllers({
     required TextEditingController age,
     required TextEditingController trestbps,
     required TextEditingController chol,

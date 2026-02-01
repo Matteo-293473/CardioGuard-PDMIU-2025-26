@@ -14,8 +14,8 @@ class HeartbeatLogo extends StatefulWidget {
 }
 
 class _HeartbeatLogoState extends State<HeartbeatLogo> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
+  late AnimationController _controller; // controller per la gestione dell'animazione
+  late Animation<double> _animation; // animazione del logo
 
   @override
   void initState() {

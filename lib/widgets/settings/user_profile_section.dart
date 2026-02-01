@@ -7,6 +7,8 @@ import 'user_profile_read_info.dart';
 import 'user_profile_edit_info.dart';
 import '../common/header_section.dart';
 
+// consumerStatefulWidget perché gestiamo lo stato con il provider 
+// e modifichiamo anche lo stato del widget con setState internamente
 class UserProfileSection extends ConsumerStatefulWidget {
   const UserProfileSection({super.key});
 
@@ -15,9 +17,13 @@ class UserProfileSection extends ConsumerStatefulWidget {
 }
 
 class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
+  // form key per validazione form
   final _formKey = GlobalKey<FormState>();
+
+  // controller per i campi del form
   late TextEditingController _nameController;
   late TextEditingController _ageController;
+
   int _sex = 1; 
   bool _isEditing = false;
 
@@ -35,7 +41,7 @@ class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
     super.dispose();
   }
 
-  // modifica profilo dopo aver clicato il tasto edit
+  // modifica profilo dopo aver premuto il tasto edit
   void _startEditing(User user) {
     _nameController.text = user.name;
     _ageController.text = user.age.toString();
@@ -49,8 +55,10 @@ class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
     setState(() => _isEditing = false);
   }
 
-
+  // salva profilo dopo aver premuto il tasto save
   Future<void> _saveProfile() async {
+    
+    // validazione form
     if (!_formKey.currentState!.validate()) return;
 
     final name = _nameController.text.trim();
@@ -62,6 +70,7 @@ class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
       sex: _sex,
     );
 
+    // salvo il nuovo utente con il provider
     await ref.read(userProvider.notifier).saveUser(newUser);
 
     // guardo se il widget è ancora presente 
@@ -116,10 +125,12 @@ class _UserProfileSectionState extends ConsumerState<UserProfileSection> {
           ],
         ),
         
-        // contenuto: card di visualizzazione o form di modifica
+        // card di visualizzazione o form di modifica
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
+            // se in modalità modifica mostro form di modifica 
+            // altrimenti mostro card di visualizzazione
             child: showEditForm 
               ? UserProfileEditInfo(
                   formKey: _formKey,

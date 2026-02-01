@@ -13,6 +13,8 @@ class HomeDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
+
+          // header drawer
           DrawerHeader(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primaryContainer,
@@ -34,6 +36,7 @@ class HomeDrawer extends StatelessWidget {
             ),
           ),
 
+          // lista menu laterale
           ListTile(
             leading: const Icon(Icons.monitor_heart_outlined),
             title: const Text('Le mie Misurazioni'),
@@ -54,7 +57,9 @@ class HomeDrawer extends StatelessWidget {
               );
             },
           ),
+
           const Divider(),
+          
           ListTile(
             leading: const Icon(Icons.settings_outlined),
             title: const Text('Impostazioni'),

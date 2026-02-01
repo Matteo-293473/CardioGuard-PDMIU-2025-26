@@ -33,7 +33,7 @@ void main() async {
       overrides: [
         // qui "iniettiamo" l'istanza di SharedPreferences dentro Riverpod.
         // sharedPreferencesProvider nel codice diventa: "usa QUESTO prefs già pronto".
-        // Risultato: tutti i provider che dipendono da sharedPreferencesProvider non devono più fare getInstance().
+        // Tutti i provider che dipendono da sharedPreferencesProvider non devono più fare getInstance().
         sharedPreferencesProvider.overrideWithValue(prefs),
       ],
       child: const MyApp(),
@@ -88,7 +88,7 @@ class MyApp extends ConsumerWidget {
            );
         }
 
-        // caso smartphone, no zoom 
+        // no zoom qui
         return child!;
       },
       home: const MyHomePage(),

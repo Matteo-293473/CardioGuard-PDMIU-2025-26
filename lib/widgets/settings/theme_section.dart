@@ -9,6 +9,7 @@ class ThemeSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // themeProvider per impostare il valore dello SwitchListTile 
     final themeMode = ref.watch(themeProvider);
     final isDark = themeMode == ThemeMode.dark;
 
@@ -21,8 +22,9 @@ class ThemeSection extends ConsumerWidget {
             title: const Text('Modalità Scura'),
             subtitle: const Text('Abilita il tema scuro'),
             secondary: Icon(isDark ? Icons.nightlight_round : Icons.wb_sunny),
-            value: isDark,
+            value: isDark, // dal provider
             onChanged: (value) async {
+              // cambio tema tramite provider
               await ref.read(themeProvider.notifier).toggleTheme();
             },
           ),

@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import '../common/custom_text_field.dart';
 
 class UserProfileEditInfo extends StatelessWidget {
+  // passiamo il form key per validazione form
   final GlobalKey<FormState> formKey;
+
+  // passiamo i controller per i campi del form
   final TextEditingController nameController;
   final TextEditingController ageController;
+  
   final int sex;
   final void Function(int?) onSexChanged;
 

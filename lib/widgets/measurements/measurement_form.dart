@@ -14,11 +14,13 @@ class MeasurementForm extends ConsumerStatefulWidget {
 }
 
 class _MeasurementFormState extends ConsumerState<MeasurementForm> {
+  // form + controller per validare e leggere i valori inseriti
   final _formKey = GlobalKey<FormState>();
-  final _systolicController = TextEditingController(text: '120');
-  final _diastolicController = TextEditingController(text: '80');
-  final _pulseController = TextEditingController(text: '70');
+  final _systolicController = TextEditingController();
+  final _diastolicController = TextEditingController();
+  final _pulseController = TextEditingController();
 
+  // valida il form, costruisce il model Measurement e lo salva tramite il provider
   Future<void> _saveMeasurement() async {
     if (_formKey.currentState!.validate()) {
       final measurement = Measurement(
@@ -28,6 +30,7 @@ class _MeasurementFormState extends ConsumerState<MeasurementForm> {
         timestamp: DateTime.now(),
       );
 
+      // aggiunge la misurazione tramite il provider
       await ref.read(measurementListProvider.notifier).addMeasurement(measurement);
 
       // pulizia campi dopo salvataggio

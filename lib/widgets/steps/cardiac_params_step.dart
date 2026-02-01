@@ -28,7 +28,7 @@ class CardiacParamsStep extends StatelessWidget {
           min: 30, 
           max: 250
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 20),
         CustomTextField(
           controller: oldpeakController, 
           label: 'Depressione ST (Oldpeak)', 
@@ -36,7 +36,7 @@ class CardiacParamsStep extends StatelessWidget {
           min: 0.0, 
           max: 10.0
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 25),
         DropdownButtonFormField<String>(
           initialValue: slope,
           decoration: const InputDecoration(labelText: 'Pendenza ST (Slope)'),
@@ -45,7 +45,7 @@ class CardiacParamsStep extends StatelessWidget {
             DropdownMenuItem(value: 'upsloping', child: Text('In Salita (Up)')),
             DropdownMenuItem(value: 'downsloping', child: Text('In Discesa (Down)')),
           ],
-          onChanged: (v) => onSlopeChanged(v!),
+          onChanged: (newValue) => onSlopeChanged(newValue!),
         ),
       ],
     );

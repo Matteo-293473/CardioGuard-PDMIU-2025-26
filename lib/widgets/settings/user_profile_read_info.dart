@@ -4,6 +4,7 @@ import '../../data/models/user.dart';
 
 class UserProfileReadInfo extends StatelessWidget {
   final User user;
+  // passiamo lo user (downstream)
   const UserProfileReadInfo({super.key, required this.user});
 
   @override

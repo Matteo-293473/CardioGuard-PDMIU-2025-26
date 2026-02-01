@@ -28,7 +28,7 @@ class VitalParamsStep extends StatelessWidget {
           min: 50,
           max: 300
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 20),
         CustomTextField(
           controller: cholController, 
           label: 'Colesterolo', 
@@ -36,7 +36,7 @@ class VitalParamsStep extends StatelessWidget {
           min: 50, 
           max: 600
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 25),
         DropdownButtonFormField<String>(
           initialValue: fbs,
           decoration: const InputDecoration(labelText: 'Glicemia > 120 mg/dl (FBS)'),
@@ -44,7 +44,7 @@ class VitalParamsStep extends StatelessWidget {
             DropdownMenuItem(value: 'false', child: Text('No')),
             DropdownMenuItem(value: 'true', child: Text('Sì')),
           ],
-          onChanged: (v) => onFbsChanged(v!),
+          onChanged: (newValue) => onFbsChanged(newValue!),
         ),
       ],
     );

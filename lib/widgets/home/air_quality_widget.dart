@@ -12,6 +12,7 @@ class AirQualityWidget extends ConsumerWidget {
     final aqAsync = ref.watch(airQualityProvider);
 
     return aqAsync.when(
+      // successo
       data: (aq) => Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -47,7 +48,10 @@ class AirQualityWidget extends ConsumerWidget {
           ],
         ),
       ),
+
+      // loading
       loading: () => const CircularProgressIndicator(),
+      
       // errore generico
       error: (error, stack) => const Row(
         mainAxisSize: MainAxisSize.min,

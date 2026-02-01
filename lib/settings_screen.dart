@@ -1,14 +1,13 @@
 // schermata delle impostazioni per gestire il profilo utente e le preferenze grafiche.
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widgets/settings/user_profile_section.dart';
 import 'widgets/settings/theme_section.dart';
 
-class SettingsScreen extends ConsumerWidget {
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Impostazioni'),

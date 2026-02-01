@@ -15,6 +15,7 @@ class MeasurementsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Le mie Misurazioni'),
       ),
+      // se schermo è in modalità verticale allora mostro form e lista misurazioni in colonna
       body: isPortrait
           ? const Column(
               children: [
@@ -29,6 +30,7 @@ class MeasurementsScreen extends StatelessWidget {
                 ),
               ],
             )
+            // altrimenti mostro form e lista misurazioni in riga
           : Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

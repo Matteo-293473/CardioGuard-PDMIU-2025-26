@@ -8,18 +8,22 @@ class MeasurementsList extends ConsumerWidget {
   const MeasurementsList({super.key});
 
   Future<void> _confirmDelete(BuildContext context, WidgetRef ref, int id) async {
+    // mostriamo la dialog di conferma
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Conferma'),
         content: const Text('Vuoi davvero eliminare questa misurazione?'),
         actions: [
+          // restituisce un booleano in base alla scelta dell'utente
           TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Annulla')),
           TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Elimina')),
         ],
       ),
     );
 
+    // se l'utente ha confermato l'eliminazione
+    // si chiama il metodo removeMeasurement del provider
     if (confirmed == true) {
       await ref.read(measurementListProvider.notifier).removeMeasurement(id);
     }
@@ -27,6 +31,7 @@ class MeasurementsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ci serve lo stato del provider per visualizzare le misurazioni
     final measurementsAsync = ref.watch(measurementListProvider);
 
     return measurementsAsync.when(
@@ -37,6 +42,7 @@ class MeasurementsList extends ConsumerWidget {
           );
         }
 
+        // misurazioni salvate
         return ListView.separated(
           padding: const EdgeInsets.symmetric(vertical: 8),
           itemCount: measurements.length,
@@ -45,6 +51,7 @@ class MeasurementsList extends ConsumerWidget {
             final m = measurements[index];
             final dateStr = DateFormat('dd/MM/yyyy HH:mm').format(m.timestamp);
             
+            // per ogni misurazione creiamo una ListTile
             return ListTile(
               leading: const CircleAvatar(
                 child: Icon(Icons.favorite, color: Colors.red),
@@ -53,12 +60,14 @@ class MeasurementsList extends ConsumerWidget {
               subtitle: Text(dateStr),
               trailing: IconButton(
                 icon: const Icon(Icons.delete_outline, color: Colors.red),
+                // premo l'icon del cestino
                 onPressed: () => _confirmDelete(context, ref, m.id!),
               ),
             );
           },
         );
       },
+      // gestisco gli altri casi dell'asyncValue
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => const Center(child: Text('Si è verificato un errore nel caricamento dei dati.')),
     );

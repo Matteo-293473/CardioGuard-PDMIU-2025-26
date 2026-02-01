@@ -8,6 +8,8 @@ class HomeGreeting extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    // ci serve lo stato del provider per visualizzare il nome e il sesso
     final user = ref.watch(userProvider);
     
     final name = user?.name ?? "";

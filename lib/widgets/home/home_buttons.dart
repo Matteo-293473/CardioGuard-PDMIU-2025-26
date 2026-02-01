@@ -11,6 +11,7 @@ class HomeButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
+    // bottone "Le mie misurazioni"
     final measurementsButton = _buildHomeButton(
       context,
       isLandscape ? 'Le mie Misurazioni' : 'Misurazioni',
@@ -20,7 +21,8 @@ class HomeButtons extends StatelessWidget {
         MaterialPageRoute(builder: (context) => const MeasurementsScreen()),
       ),
     );
-
+    
+    // bottone "Analisi AI"
     final aiButton = _buildHomeButton(
       context,
       'Analisi AI',
@@ -30,9 +32,10 @@ class HomeButtons extends StatelessWidget {
         MaterialPageRoute(builder: (context) => const DiagnosisScreen()),
       ),
     );
-
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
+      // se orizzontale, bottoni in riga, altrimenti in colonna
       child: isLandscape
           ? Row(
               children: [
