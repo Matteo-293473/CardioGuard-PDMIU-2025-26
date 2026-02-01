@@ -48,7 +48,7 @@ class DiagnosisController extends AsyncNotifier<DiagnosisResult?> {
       if (e.toString().contains('Timeout')) {
         message = 'Il server sta impiegando troppo tempo. Riprova tra poco.';
       } else {
-        message = e.toString().replaceFirst('Exception: ', '');
+        message = 'Errore di connessione. Riprova più tardi.';
       }
       state = AsyncValue.error(message, stack);
     }

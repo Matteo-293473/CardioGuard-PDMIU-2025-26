@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class DiagnosisErrorCard extends StatelessWidget {
   final String error;
-  final VoidCallback onRetry;
+  final VoidCallback onClose;
 
   const DiagnosisErrorCard({
     super.key,
     required this.error,
-    required this.onRetry,
+    required this.onClose,
   });
 
   @override
@@ -39,7 +39,7 @@ class DiagnosisErrorCard extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: FilledButton(
-                onPressed: onRetry,
+                onPressed: onClose,
                 child: const Text('Chiudi'),
               ),
             ),

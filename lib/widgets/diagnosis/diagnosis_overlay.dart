@@ -95,7 +95,7 @@ class DiagnosisOverlay extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             child: DiagnosisErrorCard(
               error: diagnosisState.error.toString(),
-              onRetry: onRetry,
+              onClose: onReset,
             ),
           ),
         ),
