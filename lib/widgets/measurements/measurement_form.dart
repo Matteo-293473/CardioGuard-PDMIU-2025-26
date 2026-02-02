@@ -34,6 +34,7 @@ class _MeasurementFormState extends ConsumerState<MeasurementForm> {
       await ref.read(measurementListProvider.notifier).addMeasurement(measurement);
 
       // pulizia campi dopo salvataggio
+      _formKey.currentState?.reset();
       _systolicController.clear();
       _diastolicController.clear();
       _pulseController.clear();
@@ -75,6 +76,7 @@ class _MeasurementFormState extends ConsumerState<MeasurementForm> {
                       suffixText: 'mmHg',
                       min: 50,
                       max: 300,
+                      textInputAction: TextInputAction.next,
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -85,6 +87,7 @@ class _MeasurementFormState extends ConsumerState<MeasurementForm> {
                       suffixText: 'mmHg',
                       min: 30,
                       max: 200,
+                      textInputAction: TextInputAction.next,
                     ),
                   ),
                 ],
@@ -99,6 +102,8 @@ class _MeasurementFormState extends ConsumerState<MeasurementForm> {
                       suffixText: 'bpm',
                       min: 30,
                       max: 250,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) => _saveMeasurement(),
                     ),
                   ),
                 ],

@@ -14,6 +14,8 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final int? maxLength;
   final bool onlyText;
+  final TextInputAction? textInputAction;
+  final void Function(String)? onFieldSubmitted;
 
   const CustomTextField({
     super.key,
@@ -28,6 +30,8 @@ class CustomTextField extends StatelessWidget {
     this.onlyText = false,
     this.validator,
     this.keyboardType,
+    this.textInputAction,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -41,8 +45,10 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: icon != null ? Icon(icon, color: Theme.of(context).colorScheme.primary) : null,
         helperText: (min != null && max != null) ? 'Range: $min - $max' : null,
       ),
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      autovalidateMode: AutovalidateMode.disabled,
       keyboardType: keyboardType ?? (onlyText ? TextInputType.name : TextInputType.numberWithOptions(decimal: !isInteger)),
+      textInputAction: textInputAction,
+      onFieldSubmitted: onFieldSubmitted,
       // per la validazione possiamo passarne una oppure viene gestita qui
       validator: validator ?? (v) {
         if (v == null || v.trim().isEmpty) return 'Campo obbligatorio';
